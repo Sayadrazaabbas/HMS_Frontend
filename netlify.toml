@@ -4,3 +4,9 @@
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
+
+# Handle Next.js dynamic routes
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
