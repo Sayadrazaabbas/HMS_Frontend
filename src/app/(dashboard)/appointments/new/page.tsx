@@ -87,7 +87,7 @@ export default function NewAppointmentPage() {
         setError('');
 
         try {
-            await appointmentsApi.create(formData);
+            await appointmentsApi.create(formData as any);
             setSuccess(true);
             setTimeout(() => {
                 router.push('/appointments');

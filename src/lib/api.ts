@@ -116,8 +116,8 @@ const api = axios.create({
     baseURL: 'http://localhost:3001/api/v1',
 });
 
-// Mocking methods
-api.get = async (url: string, config?: any) => {
+// Mocking methods (using type assertion for mock overrides)
+(api as any).get = async (url: string, config?: any): Promise<any> => {
     console.log(`[MOCK API] GET ${url}`, config?.params);
     await new Promise(resolve => setTimeout(resolve, mockDelay));
 
@@ -145,7 +145,7 @@ api.get = async (url: string, config?: any) => {
     return { data: { data: [] } };
 };
 
-api.post = async (url: string, data: any) => {
+(api as any).post = async (url: string, data: any): Promise<any> => {
     console.log(`[MOCK API] POST ${url}`, data);
     await new Promise(resolve => setTimeout(resolve, mockDelay));
 
@@ -169,19 +169,19 @@ api.post = async (url: string, data: any) => {
     return { data: { data: { ...data, id: `mock-new-${Date.now()}` }, message: 'Created successfully (MOCKED)' } };
 };
 
-api.put = async (url: string, data: any) => {
+(api as any).put = async (url: string, data: any): Promise<any> => {
     console.log(`[MOCK API] PUT ${url}`, data);
     await new Promise(resolve => setTimeout(resolve, mockDelay));
     return { data: { data: { ...data }, message: 'Updated successfully (MOCKED)' } };
 };
 
-api.patch = async (url: string, data: any) => {
+(api as any).patch = async (url: string, data: any): Promise<any> => {
     console.log(`[MOCK API] PATCH ${url}`, data);
     await new Promise(resolve => setTimeout(resolve, mockDelay));
     return { data: { data: { ...data }, message: 'Status updated (MOCKED)' } };
 };
 
-api.delete = async (url: string) => {
+(api as any).delete = async (url: string): Promise<any> => {
     console.log(`[MOCK API] DELETE ${url}`);
     await new Promise(resolve => setTimeout(resolve, mockDelay));
     return { data: { message: 'Deleted successfully (MOCKED)' } };
